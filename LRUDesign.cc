@@ -35,7 +35,7 @@ public:
             {
                 //evict.
                 int keyToDeleteFromFront = (*listValues.begin()).first;
-                listValues.erase(listValues.begin());
+                listValues.pop_front();
                 m.erase(keyToDeleteFromFront);
                 //evicts from front;
             }
@@ -56,7 +56,6 @@ public:
  * int param_1 = obj->get(key);
  * obj->put(key,value);
  */
-
 /**
  * Your LRUCache object will be instantiated and called as such:
  * LRUCache* obj = new LRUCache(capacity);
