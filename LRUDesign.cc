@@ -21,24 +21,41 @@ public:
     }
     
     void put(int key, int value) {
-        if(m.size()==cap)
-        {
-            //evict.
-            int keyToDeleteFromFront = (*listValues.begin()).first;
-            listValues.erase(listValues.begin());
-            m.erase(keyToDeleteFromFront);
-            //evicts from front;
-        }
-        //if key present
+         //if key present
         if(m.find(key)!=m.end())
         {
             listValues.erase(m[key]); //get address of value in linked list and delete it
-        }
             listValues.push_back(make_pair(key,value));//push back to list.
             m[key] = prev(listValues.end()); //update address in map.
-    }
+            return;
+        }
+        else if(m.find(key)==m.end())
+        {
+            if(m.size()==cap)
+            {
+                //evict.
+                int keyToDeleteFromFront = (*listValues.begin()).first;
+                listValues.erase(listValues.begin());
+                m.erase(keyToDeleteFromFront);
+                //evicts from front;
+            }
+            listValues.push_back(make_pair(key,value));//push back to list.
+            m[key] = prev(listValues.end()); //update address in map.
+            return;
+        }
+            
+    
+        
+       }
         
 };
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
 
 /**
  * Your LRUCache object will be instantiated and called as such:
